@@ -11,8 +11,13 @@ import frc.robot.Constants;
 import java.io.File;
 import java.util.function.Supplier;
 
+import com.ctre.phoenix6.hardware.CANcoder;
+import com.ctre.phoenix6.swerve.SwerveModule;
+
 import edu.wpi.first.wpilibj.Filesystem;
 import swervelib.parser.SwerveParser;
+import swervelib.telemetry.SwerveDriveTelemetry;
+import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 import swervelib.SwerveDrive;
 import swervelib.SwerveInputStream;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -27,11 +32,11 @@ import static edu.wpi.first.units.Units.Meter;
 public class SwerveSubsystem extends SubsystemBase {
   /** Creates a new ExampleSubsystem. */
 
-  File directory = new File(Filesystem.getDeployDirectory(),"swerve/neo");
+  File directory = new File(Filesystem.getDeployDirectory(),"swerve/neo/swerve");
   SwerveDrive  swerveDrive;
 
   public SwerveSubsystem() {
-
+    SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
     try
       {
         swerveDrive = new SwerveParser(directory).createSwerveDrive(Constants.MAX_SPEED,
@@ -45,7 +50,7 @@ public class SwerveSubsystem extends SubsystemBase {
       {
         throw new RuntimeException(e);
     }
-
+  
   }
 
   /**
