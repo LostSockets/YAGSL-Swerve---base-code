@@ -101,4 +101,10 @@ public Command driveFieldOriented(Supplier<ChassisSpeeds> velocity){
   });
 }
 
+public Command driveRobotOriented(Supplier<ChassisSpeeds> velocity){
+  return run(()-> {
+    swerveDrive.drive(velocity.get());
+  });
+}
+
 }
